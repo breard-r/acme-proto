@@ -1,0 +1,25 @@
+[package]
+name = "acme-proto"
+version = "0.1.0"
+authors = ["Rodolphe Breard <rodolphe@what.tf>"]
+edition = "2021"
+description = "An asynchronous ACME (RFC 8555) library that handles the client part of the protocol."
+documentation = "https://docs.rs/acme_proto/"
+readme = "README.md"
+repository = "https://github.com/breard-r/acme-proto"
+license = "MIT OR Apache-2.0"
+keywords = ["acme"]
+
+[package.metadata.docs.rs]
+features = ["opt_account_orders"]
+
+[lib]
+name = "acme_proto"
+
+[features]
+default = ["opt_account_orders"]
+opt_account_orders = []
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
