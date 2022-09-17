@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   test:
-    name: Test
+    name: Cargo build & test
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -38,7 +38,7 @@ jobs:
           command: test
           args: --verbose --all-features
   formatting:
-    name: cargo fmt
+    name: Cargo fmt
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
