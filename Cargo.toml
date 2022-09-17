@@ -3,6 +3,7 @@ name = "acme-proto"
 version = "0.1.0"
 authors = ["Rodolphe Breard <rodolphe@what.tf>"]
 edition = "2021"
+rust-version = "1.56"
 description = "An asynchronous ACME (RFC 8555) library that handles the client part of the protocol."
 documentation = "https://docs.rs/acme_proto/"
 readme = "README.md"
