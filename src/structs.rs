@@ -16,5 +16,7 @@ macro_rules! deserialize_from_str {
 }
 
 mod directory;
+mod error;
 
 pub use directory::{Directory, DirectoryMeta};
+pub use error::Error;
