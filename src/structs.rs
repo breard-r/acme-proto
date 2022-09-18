@@ -18,7 +18,9 @@ macro_rules! deserialize_from_str {
 mod directory;
 mod error;
 mod jwk;
+mod jws;
 
 pub use directory::{Directory, DirectoryMeta};
 pub use error::Error;
 pub use jwk::Jwk;
+pub use jws::{Jws, JwsProtectedHeader};
