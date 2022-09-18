@@ -15,11 +15,13 @@ macro_rules! deserialize_from_str {
 	};
 }
 
+mod account;
 mod directory;
 mod error;
 mod jwk;
 mod jws;
 
+pub use account::{AccountManagement, AccountResource, AccountStatus};
 pub use directory::{Directory, DirectoryMeta};
 pub use error::Error;
 pub use jwk::Jwk;
