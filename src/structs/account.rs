@@ -2,7 +2,7 @@ use crate::structs::jwk::Jwk;
 use crate::structs::jws::Jws;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Eq, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum AccountStatus {
 	Valid,
@@ -25,17 +25,70 @@ pub struct AccountResource {
 
 deserialize_from_str!(AccountResource, "account resource");
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Default, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AccountManagement {
 	#[serde(skip_serializing_if = "Option::is_none")]
-	pub contact: Option<Vec<String>>,
+	status: Option<AccountStatus>,
 	#[serde(skip_serializing_if = "Option::is_none")]
-	pub terms_of_service_agreed: Option<bool>,
+	contact: Option<Vec<String>>,
 	#[serde(skip_serializing_if = "Option::is_none")]
-	pub only_return_existing: Option<bool>,
+	terms_of_service_agreed: Option<bool>,
 	#[serde(skip_serializing_if = "Option::is_none")]
-	pub external_account_binding: Option<Jws<Jwk>>,
+	only_return_existing: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	external_account_binding: Option<Jws<Jwk>>,
+}
+
+impl AccountManagement {
+	pub fn creation_request<T: ToString>(contacts: &[T], tos_agreed: bool) -> Self {
+		Self {
+			contact: Some(contacts.iter().map(|e| e.to_string()).collect()),
+			terms_of_service_agreed: Some(tos_agreed),
+			..Default::default()
+		}
+	}
+
+	pub fn external_creation_request<T: ToString>(
+		contacts: &[T],
+		tos_agreed: bool,
+		external_account: &Jws<Jwk>,
+	) -> Self {
+		Self {
+			contact: Some(contacts.iter().map(|e| e.to_string()).collect()),
+			terms_of_service_agreed: Some(tos_agreed),
+			external_account_binding: Some(external_account.to_owned()),
+			..Default::default()
+		}
+	}
+
+	pub fn lookup_request() -> Self {
+		Self {
+			only_return_existing: Some(true),
+			..Default::default()
+		}
+	}
+
+	pub fn contact_update_request<T: ToString>(new_contacts: &[T]) -> Self {
+		Self {
+			contact: Some(new_contacts.iter().map(|e| e.to_string()).collect()),
+			..Default::default()
+		}
+	}
+
+	pub fn deactivation_request() -> Self {
+		Self {
+			status: Some(AccountStatus::Deactivated),
+			..Default::default()
+		}
+	}
+}
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct AccountKeyRollover {
+	pub account: String,
+	pub old_key: Jwk,
 }
 
 #[cfg(test)]
@@ -140,5 +193,63 @@ mod tests {
 			ar.orders,
 			"https://localhost:14000/list-orderz/1".to_string()
 		);
+	}
+
+	#[test]
+	fn account_creation_request() {
+		let contacts = ["mailto:test@example.org"];
+		let req = AccountManagement::creation_request(&contacts, true);
+		let req_str = serde_json::to_string(&req);
+		assert!(req_str.is_ok(), "serialization failed");
+		let req_str = req_str.unwrap();
+		assert_eq!(
+			req_str,
+			r#"{"contact":["mailto:test@example.org"],"termsOfServiceAgreed":true}"#.to_string()
+		);
+	}
+
+	#[test]
+	fn account_contact_update_request_single() {
+		let contacts = ["mailto:test@example.org"];
+		let req = AccountManagement::contact_update_request(&contacts);
+		let req_str = serde_json::to_string(&req);
+		assert!(req_str.is_ok(), "serialization failed");
+		let req_str = req_str.unwrap();
+		assert_eq!(
+			req_str,
+			r#"{"contact":["mailto:test@example.org"]}"#.to_string()
+		);
+	}
+
+	#[test]
+	fn account_lookup_request() {
+		let req = AccountManagement::lookup_request();
+		let req_str = serde_json::to_string(&req);
+		assert!(req_str.is_ok(), "serialization failed");
+		let req_str = req_str.unwrap();
+		assert_eq!(req_str, r#"{"onlyReturnExisting":true}"#.to_string());
+	}
+
+	#[test]
+	fn account_contact_update_request_multiple() {
+		let contacts = [
+			"mailto:test@example.org",
+			"mailto:admin@example.org",
+			"mailto:acme@example.org",
+		];
+		let req = AccountManagement::contact_update_request(&contacts);
+		let req_str = serde_json::to_string(&req);
+		assert!(req_str.is_ok(), "serialization failed");
+		let req_str = req_str.unwrap();
+		assert_eq!(req_str, r#"{"contact":["mailto:test@example.org","mailto:admin@example.org","mailto:acme@example.org"]}"#.to_string());
+	}
+
+	#[test]
+	fn account_deactivation_request() {
+		let req = AccountManagement::deactivation_request();
+		let req_str = serde_json::to_string(&req);
+		assert!(req_str.is_ok(), "serialization failed");
+		let req_str = req_str.unwrap();
+		assert_eq!(req_str, r#"{"status":"deactivated"}"#.to_string());
 	}
 }
