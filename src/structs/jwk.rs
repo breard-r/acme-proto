@@ -44,12 +44,12 @@ mod tests {
 	fn serialize_rsa() {
 		let ref_s = "{\"alg\":\"RS256\",\"kty\":\"RSA\",\"use\":\"sig\",\"e\":\"AQAB\",\"n\":\"jfjEAtwZv7IdEu2YvS2Y95a-y1tw_HvNFIqtuVc0On6X4UsSSH1QEVOAKgkAVJOEsMWcumnUNe9etOfbCpO9d6E4NEw8tOY2b1bMpGHGZPV-Yu1Ik3QxgvXU7MGg0T2vQMd-migVsNQpLIol47TUWFydpGYoBcFWnogWcaBIy4H9B_2hnyp8Z-zwoG3gEY24FFtfw3Y-tnQB4MY1IPW3dqMnZ2-AUqw8KV9TH0LhnnRhuwL47rXYOXolJG4IgOZeereyCqaTLasZ_EY_ZZ7wYqAsrt7GkwWnziRVNg3uGlQyaHo1pO7V0YAQ2oEerMjpycNPLYGZggm_V7zHqxDHAQ\"}";
 		let jwk = Jwk::Rsa {
-            alg: Some("RS256".to_string()),
-            kty: "RSA".to_string(),
-            key_use: Some("sig".to_string()),
-            e: "AQAB".to_string(),
-            n: "jfjEAtwZv7IdEu2YvS2Y95a-y1tw_HvNFIqtuVc0On6X4UsSSH1QEVOAKgkAVJOEsMWcumnUNe9etOfbCpO9d6E4NEw8tOY2b1bMpGHGZPV-Yu1Ik3QxgvXU7MGg0T2vQMd-migVsNQpLIol47TUWFydpGYoBcFWnogWcaBIy4H9B_2hnyp8Z-zwoG3gEY24FFtfw3Y-tnQB4MY1IPW3dqMnZ2-AUqw8KV9TH0LhnnRhuwL47rXYOXolJG4IgOZeereyCqaTLasZ_EY_ZZ7wYqAsrt7GkwWnziRVNg3uGlQyaHo1pO7V0YAQ2oEerMjpycNPLYGZggm_V7zHqxDHAQ".to_string(),
-        };
+			alg: Some("RS256".to_string()),
+			kty: "RSA".to_string(),
+			key_use: Some("sig".to_string()),
+			e: "AQAB".to_string(),
+			n: "jfjEAtwZv7IdEu2YvS2Y95a-y1tw_HvNFIqtuVc0On6X4UsSSH1QEVOAKgkAVJOEsMWcumnUNe9etOfbCpO9d6E4NEw8tOY2b1bMpGHGZPV-Yu1Ik3QxgvXU7MGg0T2vQMd-migVsNQpLIol47TUWFydpGYoBcFWnogWcaBIy4H9B_2hnyp8Z-zwoG3gEY24FFtfw3Y-tnQB4MY1IPW3dqMnZ2-AUqw8KV9TH0LhnnRhuwL47rXYOXolJG4IgOZeereyCqaTLasZ_EY_ZZ7wYqAsrt7GkwWnziRVNg3uGlQyaHo1pO7V0YAQ2oEerMjpycNPLYGZggm_V7zHqxDHAQ".to_string(),
+		};
 		let res = serde_json::to_string(&jwk);
 		assert!(res.is_ok());
 		let s = res.unwrap();
@@ -60,12 +60,12 @@ mod tests {
 	fn serialize_rsa_thumbprint() {
 		let ref_s = "{\"kty\":\"RSA\",\"e\":\"AQAB\",\"n\":\"hgUtxyPag2X4YmazM26LZa80J_VcfNqE6VhOPj7UuCh1wkugy5sbVxC9tufjXwmJ0YyJphGGp3VNCg6UqMTQwyXwj-1EtVafmm2UJt5cqfN2sR6fjtxUy2OxQH0XrV2PeLB4nDipJPZtnDt0hKY95FSXOXrtViSdr6aznzQOho1ApTBJsGRN37cRzzZNpECBzDeLKpj6OHAraLZdUTlIByMTMa9JhJmUPlerjGqd665mjeBEnIaP9-CeF9_Pq0-s7HaHq87vx1nfOXiAMGJ4uONL0qU6pe2ZXxLQ7uwynl6EdoKf8bHrah3nn3PUNfxoiJ33oCo81JWiKKkWi2ygpmxn5FuMMun-3vmEG_n2xhTXuFOKrbOX-rM7fALBC-zmgzGe1Cb1eRcoePr-0AgOEeSNJgPUmwqF1dv7WB6XWR7UmRxn1tM6qiAuAeXIDdNbbbkQkhFEvjDVhKwyR9kesgau0KZKonTlDT7k4w-GhsG6Am-iIl61JbzqapA-lBnGqxfxEgsKbJpSsHujKXJnXlT1PM4skuXwlKB9ZHJdPjXhNGSHw7JdeUPXmIez3w6FOGF7ur_ilTNIRvknAQSdFU9LJr2yS6QucTUqo6PSwlM-0D5nIaKaplooLvBTybk9q1miHQnLoOHBhHVOzj3gPCJU75R9fZCgyafhu_a2XD8\"}";
 		let jwk = Jwk::Rsa {
-            alg: None,
-            kty: "RSA".to_string(),
-            key_use: None,
-            e: "AQAB".to_string(),
-            n: "hgUtxyPag2X4YmazM26LZa80J_VcfNqE6VhOPj7UuCh1wkugy5sbVxC9tufjXwmJ0YyJphGGp3VNCg6UqMTQwyXwj-1EtVafmm2UJt5cqfN2sR6fjtxUy2OxQH0XrV2PeLB4nDipJPZtnDt0hKY95FSXOXrtViSdr6aznzQOho1ApTBJsGRN37cRzzZNpECBzDeLKpj6OHAraLZdUTlIByMTMa9JhJmUPlerjGqd665mjeBEnIaP9-CeF9_Pq0-s7HaHq87vx1nfOXiAMGJ4uONL0qU6pe2ZXxLQ7uwynl6EdoKf8bHrah3nn3PUNfxoiJ33oCo81JWiKKkWi2ygpmxn5FuMMun-3vmEG_n2xhTXuFOKrbOX-rM7fALBC-zmgzGe1Cb1eRcoePr-0AgOEeSNJgPUmwqF1dv7WB6XWR7UmRxn1tM6qiAuAeXIDdNbbbkQkhFEvjDVhKwyR9kesgau0KZKonTlDT7k4w-GhsG6Am-iIl61JbzqapA-lBnGqxfxEgsKbJpSsHujKXJnXlT1PM4skuXwlKB9ZHJdPjXhNGSHw7JdeUPXmIez3w6FOGF7ur_ilTNIRvknAQSdFU9LJr2yS6QucTUqo6PSwlM-0D5nIaKaplooLvBTybk9q1miHQnLoOHBhHVOzj3gPCJU75R9fZCgyafhu_a2XD8".to_string(),
-        };
+			alg: None,
+			kty: "RSA".to_string(),
+			key_use: None,
+			e: "AQAB".to_string(),
+			n: "hgUtxyPag2X4YmazM26LZa80J_VcfNqE6VhOPj7UuCh1wkugy5sbVxC9tufjXwmJ0YyJphGGp3VNCg6UqMTQwyXwj-1EtVafmm2UJt5cqfN2sR6fjtxUy2OxQH0XrV2PeLB4nDipJPZtnDt0hKY95FSXOXrtViSdr6aznzQOho1ApTBJsGRN37cRzzZNpECBzDeLKpj6OHAraLZdUTlIByMTMa9JhJmUPlerjGqd665mjeBEnIaP9-CeF9_Pq0-s7HaHq87vx1nfOXiAMGJ4uONL0qU6pe2ZXxLQ7uwynl6EdoKf8bHrah3nn3PUNfxoiJ33oCo81JWiKKkWi2ygpmxn5FuMMun-3vmEG_n2xhTXuFOKrbOX-rM7fALBC-zmgzGe1Cb1eRcoePr-0AgOEeSNJgPUmwqF1dv7WB6XWR7UmRxn1tM6qiAuAeXIDdNbbbkQkhFEvjDVhKwyR9kesgau0KZKonTlDT7k4w-GhsG6Am-iIl61JbzqapA-lBnGqxfxEgsKbJpSsHujKXJnXlT1PM4skuXwlKB9ZHJdPjXhNGSHw7JdeUPXmIez3w6FOGF7ur_ilTNIRvknAQSdFU9LJr2yS6QucTUqo6PSwlM-0D5nIaKaplooLvBTybk9q1miHQnLoOHBhHVOzj3gPCJU75R9fZCgyafhu_a2XD8".to_string(),
+		};
 		let res = serde_json::to_string(&jwk);
 		assert!(res.is_ok());
 		let s = res.unwrap();

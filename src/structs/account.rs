@@ -132,9 +132,9 @@ mod tests {
 	#[test]
 	fn deserialize_account_resource_min() {
 		let ar = r#" {
-            "status": "valid",
-            "orders": "https://localhost:14000/list-orderz/1"
-        } "#;
+			"status": "valid",
+			"orders": "https://localhost:14000/list-orderz/1"
+		} "#;
 		let res = serde_json::from_str::<AccountResource>(ar);
 		assert!(res.is_ok(), "deserialization failed");
 		let ar = res.unwrap();
@@ -156,24 +156,24 @@ mod tests {
 	#[test]
 	fn deserialize_account_resource_max() {
 		let ar = r#" {
-            "status": "valid",
-            "contact": ["mailto:derp@example.com"],
-            "orders": "https://localhost:14000/list-orderz/1",
-            "termsOfServiceAgreed": true,
-            "externalAccountBinding": {
-                "protected": "eyJhbGciOiJIUzI1NiIsImtpZCI6ImtpZC0xIiwidXJsIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MTQwMDAvc2lnbi1tZS11cCJ9",
-                "payload": "eyJhbGciOiJFUzM4NCIsImNydiI6IlAtMzg0Iiwia3R5IjoiRUMiLCJ1c2UiOiJzaWciLCJ4IjoiTzZYTnkxemFZMkNTWnJXc3V4T2xYdUsweHhtSUxHQzN0WFdSZ21FeW9pbWpaeDVsb2M1bHNYRVhnMFdZSFRMYSIsInkiOiI0RHY4T3RTNXR4OXgzbDRsX2Z1TGpaeGozYUJaTkY4U2liS2FRa1JXSGlEZGJWUk5ZZTlqS0MzemhmUlgzYi1TIn0",
-                "signature": "a4em7D92pNE1_TA1ITYlerjGx2FG0aouOjijUqt9q0o"
-            },
-            "key": {
-                "use": "sig",
-                "kty": "EC",
-                "crv": "P-384",
-                "alg": "ES384",
-                "x": "O6XNy1zaY2CSZrWsuxOlXuK0xxmILGC3tXWRgmEyoimjZx5loc5lsXEXg0WYHTLa",
-                "y": "4Dv8OtS5tx9x3l4l_fuLjZxj3aBZNF8SibKaQkRWHiDdbVRNYe9jKC3zhfRX3b-S"
-            }
-        } "#;
+			"status": "valid",
+			"contact": ["mailto:derp@example.com"],
+			"orders": "https://localhost:14000/list-orderz/1",
+			"termsOfServiceAgreed": true,
+			"externalAccountBinding": {
+				"protected": "eyJhbGciOiJIUzI1NiIsImtpZCI6ImtpZC0xIiwidXJsIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MTQwMDAvc2lnbi1tZS11cCJ9",
+				"payload": "eyJhbGciOiJFUzM4NCIsImNydiI6IlAtMzg0Iiwia3R5IjoiRUMiLCJ1c2UiOiJzaWciLCJ4IjoiTzZYTnkxemFZMkNTWnJXc3V4T2xYdUsweHhtSUxHQzN0WFdSZ21FeW9pbWpaeDVsb2M1bHNYRVhnMFdZSFRMYSIsInkiOiI0RHY4T3RTNXR4OXgzbDRsX2Z1TGpaeGozYUJaTkY4U2liS2FRa1JXSGlEZGJWUk5ZZTlqS0MzemhmUlgzYi1TIn0",
+				"signature": "a4em7D92pNE1_TA1ITYlerjGx2FG0aouOjijUqt9q0o"
+			},
+			"key": {
+				"use": "sig",
+				"kty": "EC",
+				"crv": "P-384",
+				"alg": "ES384",
+				"x": "O6XNy1zaY2CSZrWsuxOlXuK0xxmILGC3tXWRgmEyoimjZx5loc5lsXEXg0WYHTLa",
+				"y": "4Dv8OtS5tx9x3l4l_fuLjZxj3aBZNF8SibKaQkRWHiDdbVRNYe9jKC3zhfRX3b-S"
+			}
+		} "#;
 		let res = serde_json::from_str::<AccountResource>(ar);
 		assert!(res.is_ok(), "deserialization failed");
 		let ar = res.unwrap();

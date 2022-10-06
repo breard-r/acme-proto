@@ -31,13 +31,13 @@ mod tests {
 	#[test]
 	fn test_directory() {
 		let data = "{
-  \"newAccount\": \"https://example.org/acme/new-acct\",
-  \"newNonce\": \"https://example.org/acme/new-nonce\",
-  \"newOrder\": \"https://example.org/acme/new-order\",
-  \"revokeCert\": \"https://example.org/acme/revoke-cert\",
-  \"newAuthz\": \"https://example.org/acme/new-authz\",
-  \"keyChange\": \"https://example.org/acme/key-change\"
-}";
+			\"newAccount\": \"https://example.org/acme/new-acct\",
+			\"newNonce\": \"https://example.org/acme/new-nonce\",
+			\"newOrder\": \"https://example.org/acme/new-order\",
+			\"revokeCert\": \"https://example.org/acme/revoke-cert\",
+			\"newAuthz\": \"https://example.org/acme/new-authz\",
+			\"keyChange\": \"https://example.org/acme/key-change\"
+		}";
 		let parsed_dir = Directory::from_str(data);
 		assert!(parsed_dir.is_ok());
 		let parsed_dir = parsed_dir.unwrap();
@@ -59,12 +59,12 @@ mod tests {
 	#[test]
 	fn test_directory_no_authz() {
 		let data = "{
-  \"newAccount\": \"https://example.org/acme/new-acct\",
-  \"newNonce\": \"https://example.org/acme/new-nonce\",
-  \"newOrder\": \"https://example.org/acme/new-order\",
-  \"revokeCert\": \"https://example.org/acme/revoke-cert\",
-  \"keyChange\": \"https://example.org/acme/key-change\"
-}";
+			\"newAccount\": \"https://example.org/acme/new-acct\",
+			\"newNonce\": \"https://example.org/acme/new-nonce\",
+			\"newOrder\": \"https://example.org/acme/new-order\",
+			\"revokeCert\": \"https://example.org/acme/revoke-cert\",
+			\"keyChange\": \"https://example.org/acme/key-change\"
+		}";
 		let parsed_dir = Directory::from_str(data);
 		assert!(parsed_dir.is_ok());
 		let parsed_dir = parsed_dir.unwrap();
@@ -83,19 +83,17 @@ mod tests {
 	#[test]
 	fn test_directory_meta() {
 		let data = "{
-  \"keyChange\": \"https://example.org/acme/key-change\",
-  \"meta\": {
-    \"caaIdentities\": [
-      \"example.org\"
-    ],
-    \"termsOfService\": \"https://example.org/documents/tos.pdf\",
-    \"website\": \"https://example.org/\"
-  },
-  \"newAccount\": \"https://example.org/acme/new-acct\",
-  \"newNonce\": \"https://example.org/acme/new-nonce\",
-  \"newOrder\": \"https://example.org/acme/new-order\",
-  \"revokeCert\": \"https://example.org/acme/revoke-cert\"
-}";
+			\"keyChange\": \"https://example.org/acme/key-change\",
+			\"meta\": {
+				\"caaIdentities\": [\"example.org\"],
+				\"termsOfService\": \"https://example.org/documents/tos.pdf\",
+				\"website\": \"https://example.org/\"
+			},
+			\"newAccount\": \"https://example.org/acme/new-acct\",
+			\"newNonce\": \"https://example.org/acme/new-nonce\",
+			\"newOrder\": \"https://example.org/acme/new-order\",
+			\"revokeCert\": \"https://example.org/acme/revoke-cert\"
+		}";
 		let parsed_dir = Directory::from_str(&data);
 		assert!(parsed_dir.is_ok());
 		let parsed_dir = parsed_dir.unwrap();
@@ -116,15 +114,15 @@ mod tests {
 	#[test]
 	fn test_directory_extra_fields() {
 		let data = "{
-  \"foo\": \"bar\",
-  \"keyChange\": \"https://example.org/acme/key-change\",
-  \"newAccount\": \"https://example.org/acme/new-acct\",
-  \"baz\": \"quz\",
-  \"newNonce\": \"https://example.org/acme/new-nonce\",
-  \"newAuthz\": \"https://example.org/acme/new-authz\",
-  \"newOrder\": \"https://example.org/acme/new-order\",
-  \"revokeCert\": \"https://example.org/acme/revoke-cert\"
-}";
+			\"foo\": \"bar\",
+			\"keyChange\": \"https://example.org/acme/key-change\",
+			\"newAccount\": \"https://example.org/acme/new-acct\",
+			\"baz\": \"quz\",
+			\"newNonce\": \"https://example.org/acme/new-nonce\",
+			\"newAuthz\": \"https://example.org/acme/new-authz\",
+			\"newOrder\": \"https://example.org/acme/new-order\",
+			\"revokeCert\": \"https://example.org/acme/revoke-cert\"
+		}";
 		let parsed_dir = Directory::from_str(&data);
 		assert!(parsed_dir.is_ok());
 		let parsed_dir = parsed_dir.unwrap();
